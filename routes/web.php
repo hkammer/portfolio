@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,40 +22,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', HomeController::class);
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 
-Route::get('about', function() {
-    return "<h1>About Ben</h1>";
-})->name('about');
-
-Route::get('contact', function() {
-    return "<h1>Contact</h1>";
-});
-
-Route::get('contact/{id}', function($id){
-    return $id;
-})->name('edit-contact');
-
-Route::get('home', function(){
-    return "<a href='".route('edit-contact', 1)."'>About</a>";
-});
-
-// Route Grouping
-
-Route::group(['prefix'=>'customer'], function(){
-
-    Route:: get('/', function(){
-        return "<h1>Customer List</h1>";
-    });
-
-    Route:: get('/create', function(){
-        return "<h1>Customer Create</h1>";
-    });
-
-    Route:: get('/show', function(){
-        return "<h1>Customer Show</h1>";
-    });
-
-});
+Route::post('/login', [LoginController::class, 'handleLogin'])->name('login.submit');
 
 Route::fallback(function(){
     return('this is your 404 page');
