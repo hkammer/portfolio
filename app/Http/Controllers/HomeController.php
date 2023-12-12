@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,14 +16,18 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $blogs = [
-            [
-                "title"=>"Title",
-                "body"=>"Body",
-                "status"=>1
-            ]
-            ];
-            return view('home', compact('blogs'));
+
+        // $categories = Category::find(2)->posts;
+        // return view('home', compact('categories'));
+
+        $posts = Post::with('tags')->get();
+
+        $tag = Tag::first();
+
+        //$post->tags()->attach([2,3,4]);
+
+        //return $post;
+        return view('home', compact('posts'));
 
     }
 }
