@@ -4,7 +4,17 @@
 
 <main role="main" class="container">
 
+
+
+    <img src="{{asset('/storage/images/new_image.jpg')}}" alt="">
     <div class="col-md-4 mt-5">
+
+        @if ($errors->any())
+        @foreach ($errors->all() as $error )
+        <div class="alert alert-danger">{{$error}}</div>
+        @endforeach
+        @endif
+
         <div class="card">
 
             <div class="card-body">
@@ -23,7 +33,11 @@
 
             </div>
         </div>
+        <a href="{{route('download')}}" class="btn btn-primary mt-5">Download Image</a>
+
+
     </div>
+
 
 </main>
 

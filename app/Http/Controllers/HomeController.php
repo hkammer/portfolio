@@ -8,6 +8,9 @@ use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+
 
 class HomeController extends Controller
 {
@@ -17,17 +20,10 @@ class HomeController extends Controller
     public function __invoke(Request $request)
     {
 
-        // $categories = Category::find(2)->posts;
-        // return view('home', compact('categories'));
+    //Storage::delete('/images/new_image.jpg');
+    //File::delete(storage_path('/app/public/images/P3arCmxfSoeHDMQVtQ7uEGQVhQkY4K6FMLir1rcx.jpg'));
+    //unlink(storage_path('/app/public/images/Yn7Pk5rDr2cJDfxP8yKnT8wkAEREBKIHA6FoIGC9.jpg'));
 
-        $posts = Post::with('tags')->get();
-
-        $tag = Tag::first();
-
-        //$post->tags()->attach([2,3,4]);
-
-        //return $post;
-        return view('home', compact('posts'));
-
-    }
+    return view('home');
+}
 }
